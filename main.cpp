@@ -1,6 +1,4 @@
 #include <iostream>
-#define WIDTH 50
-#define HEIGHT 50
 #include <thread>
 #include <Windows.h>
 #include <unistd.h>
@@ -30,6 +28,9 @@ int main(){
     }
 
 }
+//****************************************meta data************************************//
+#define WIDTH 50
+#define HEIGHT 50
 char arr[HEIGHT][WIDTH];
 class Box {
 public:
@@ -83,20 +84,35 @@ void  draw(){
         cout<<endl;
     }
 }
+int down_x=1;
+int up_x=-1;
+int left_y=-1;
+int right_y=1;
+Box box;
 void start(){
-    init();
-    Box box;
     ShowConsoleCursor(false);
-    draw();
-    box.setxy(3,3);
-    box.place();
-    draw();
-    box.clear();
-    draw();
-    box.setClearPlace(5,5);
-    draw();
-    getchar();
+    init();
+    box.setxy(20,4);
+//    ShowConsoleCursor(false);
+//    draw();
+//    box.setxy(3,3);
+//    box.place();
+//    draw();
+//    box.clear();
+//    draw();
+//    box.setClearPlace(5,5);
+//    draw();
+//    getchar();
 }
 void update(){
-    exit(0);
+    box.place();
+    draw();
+    COORD coord;
+    coord.X = 0;
+    coord.Y = 0;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+    box.setClearPlace(down_x,right_y);//move down right
+    ShowConsoleCursor(false);
+
+
 }
