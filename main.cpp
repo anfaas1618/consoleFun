@@ -109,6 +109,7 @@ void  init(){
         }
 
     }
+
 }
 void  draw(){
     for (int i = 0; i < HEIGHT; i++) {
@@ -151,32 +152,87 @@ void start(){
 }
 static int y= 1;
 static int x=1;
-bool col1=false;
-bool col2 = false;
-bool col3 = false;
-bool col4 = false;
+
 void update(){
-box.place();
-    draw();
+
     COORD coord;
     coord.X = 0;
     coord.Y = 0;
+    box.place();
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-    if (col1== false)
-        col1 = box.setClearPlace(down_x, right_y);//move down right
-
-     else if (col2 == false)
-       col2 =  box.setClearPlace(up_x, right_y);//move up right
-       else if (col3 == false)
-           col3 =box.setClearPlace(up_x,left_y);
-    else if (col4 == false)
-        col4 =box.setClearPlace(down_x,left_y);
-    else {
-        col1 = col2 = col3 =col4 = false;
+    draw();
+    if (collision== true) {
+        Box b2;
+        b2.setxy(20,4);
+       box =  b2;
+       collision= false;
     }
 
-
-
-
+box.setClearPlace(down_x,right_y);
     ShowConsoleCursor(false);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//bool col1=false;
+//bool col2 = false;
+//bool col3 = false;
+//bool col4 = false;
+//    if (col1== false)
+//        col1 = box.setClearPlace(down_x, right_y);//move down right
+//
+//     else if (col2 == false)
+//       col2 =  box.setClearPlace(up_x, right_y);//move up right
+//       else if (col3 == false)
+//           col3 =box.setClearPlace(up_x,left_y);
+//    else if (col4 == false)
+//        col4 =box.setClearPlace(down_x,left_y);
+//    else {
+//        col1 = col2 = col3 =col4 = false;
+//    }
