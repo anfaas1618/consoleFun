@@ -35,8 +35,11 @@ int main(){
 
 }
 //****************************************meta data************************************//
-#define WIDTH 50
-#define HEIGHT 50
+#define WIDTH 40
+#define HEIGHT 25
+#include <conio.h>
+enum eDirecton { STOP = 0, LEFT, RIGHT, UP, DOWN};
+eDirecton dir;
 char arr[HEIGHT][WIDTH];
 static bool collision = false;
 class Box {
@@ -83,18 +86,13 @@ public:
         for (int i = 0; i <4 ; ++i) {
             int checkX = COORDINATES[i][0]+x;
             int checkY = COORDINATES[i][1]+y;
-
             a= canplace(arr[checkX][checkY]);
             if (a== false) return true;
         }
         if (a== true)  for (int i = 0; i < 4; ++i) {
-            arr[COORDINATES[i][0]][COORDINATES[i][1]] = ' ';
+                arr[COORDINATES[i][0]][COORDINATES[i][1]]=' ';
             COORDINATES[i][0] += x;
             COORDINATES[i][1] += y;
-            arr[COORDINATES[i][0]][COORDINATES[i][1]]='#';
-
-
-
         }
     }
 };
@@ -126,11 +124,42 @@ int left_y=-1;
 int right_y=1;
 Box box;
 
+void Input()
+{
+    if (kbhit())
+    {
+        switch (getch())
+        {
+            case 'a':
+                box.setClearPlace(0,left_y);
+                box.place();
+                break;
+            case 'd':
+                box.setClearPlace(0,right_y);
+                box.place();
+                break;
+            case 'w':
+                box.setClearPlace(up_x,0);
+                box.place();
+                break;
+            case 's':
+                box.setClearPlace(down_x,0);
+                box.place();
+                break;
+            default:
+                break;
+        }
+    }
+}
+static int y= 1;
+static int x=1;
+char ch;
+
 
 void start(){
     ShowConsoleCursor(false);
     init();
-    box.setxy(20,4);
+    box.setxy(4,4);
 
 
     //////////////char finder////////
@@ -150,25 +179,18 @@ void start(){
 //    draw();
 //    getchar();
 }
-static int y= 1;
-static int x=1;
+
 
 void update(){
 
     COORD coord;
     coord.X = 0;
     coord.Y = 0;
-    box.place();
+
+
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
     draw();
-    if (collision== true) {
-        Box b2;
-        b2.setxy(20,4);
-       box =  b2;
-       collision= false;
-    }
-
-box.setClearPlace(down_x,right_y);
+   Input();
     ShowConsoleCursor(false);
 }
 
