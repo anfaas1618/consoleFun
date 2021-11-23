@@ -117,6 +117,7 @@ void  draw(){
         cout<<endl;
 
     }
+
 }
 int down_x=1;
 int up_x=-1;
